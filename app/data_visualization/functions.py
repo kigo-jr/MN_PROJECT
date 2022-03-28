@@ -27,6 +27,7 @@ def plot(df: DataFrame, column: str, company: str, count: int=1000) -> None:
 
     plt.show()
 
-def macd(df: DataFrame, column: str) -> DataFrame:
-    ret_df = DataFrame()
+def macd(df: DataFrame, column: str, count: int=1000) -> DataFrame:
+    ret_df = df.tail(count+1) # ostatnie 1000 rekordów
+    
     pass
