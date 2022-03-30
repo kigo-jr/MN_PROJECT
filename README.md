@@ -3,6 +3,7 @@
 ## Zależności projektu
 - pandas
 - matplotlib
+- numpy
 
 ## Uruchamianie projektu pod linuxem
 instalowanie zależności
