@@ -10,4 +10,5 @@ plot(amd_data, "Close", "AMD", len(amd_data))
 macd(amd_data, "Close")
 signal(amd_data)
 
-plot_macd(amd_data, "AMD")
+plot_macd(amd_data, "AMD", len(amd_data))
+print(amd_data)
