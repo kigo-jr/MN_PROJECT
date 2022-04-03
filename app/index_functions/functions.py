@@ -11,14 +11,13 @@ def ema(span: int, df: DataFrame, column: str, inplace: bool=True) -> DataFrame:
     ema = [np.nan for i in range(len(df))]
     smoothing_factor = 2 / (span + 1)
 
-    for i in range(len(return_df) - 1, -1, -1):
-        num = float(.0)
-        den = float(.0)
-        if i > span:
-            for j in range(span):
-                num += ((1 - smoothing_factor) ** j) * data[i - j]
-                den += (1 - smoothing_factor) ** j
-            ema[i] = num/den
+    for i in range(len(return_df) - 1, span+1, -1):
+        num = .0
+        den = .0
+        for j in range(span):
+            num += ((1 - smoothing_factor) ** j) * data[i - j]
+            den += (1 - smoothing_factor) ** j
+        ema[i] = num/den
 
     return_df[f"EMA_{span}"] = ema
 
