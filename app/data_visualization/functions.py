@@ -27,7 +27,23 @@ def plot(df: DataFrame, column: str, company: str, count: int=1000) -> None:
 
     plt.show()
 
-def macd(df: DataFrame, column: str, count: int=1000) -> DataFrame:
-    ret_df = df.tail(count+1) # ostatnie 1000 rekordów
+def plot_macd(df: DataFrame, company: str, count: int=1000) -> None:
     
-    pass
+    _, ax = plt.subplots()
+
+    plot_df = df.tail(count)
+
+    plot_df.plot(y = "MACD", ax=ax)
+    plot_df.plot(y = "SIGNAL", ax=ax)
+    ax.set_axisbelow(True)
+    ax.minorticks_on()
+
+    ax.grid(which="major", linestyle="-", linewidth="0.5", color="red")
+    ax.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
+
+    plt.title(f"Cena akcji {company}")
+    plt.xlabel("Data")
+    plt.ylabel("MACD")
+
+    plt.show()
+    
