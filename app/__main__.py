@@ -16,3 +16,7 @@ plot_all(amd_data, "Close", "AMD")
 print(amd_data)
 print(f"profit przy inwestycji długoterminowej (1000 dni): {trading_algorythm(amd_data, (len(amd_data) - 1000, len(amd_data) - 1)):.2f}")
 print(f"profit przy inwestycji krótkoterminowej (30 dni): {trading_algorythm(amd_data, (len(amd_data) - 30, len(amd_data) - 1)):.2f}")
+
+# dane dla 700 wstecz
+print(f"profit przy inwestycji długoterminowej (1000 dni): {trading_algorythm(amd_data, (len(amd_data) - 1000 - 700, len(amd_data) - 1 - 700)):.2f}")
+print(f"profit przy inwestycji krótkoterminowej (30 dni): {trading_algorythm(amd_data, (len(amd_data) - 30 - 700, len(amd_data) - 1 - 700)):.2f}")
