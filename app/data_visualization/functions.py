@@ -2,7 +2,6 @@ from pandas import DataFrame
 from pandas import to_datetime
 import matplotlib.pyplot as plt
 
-# TODO: Wizualizacja dancyh na 1 wykresie
 
 def prepare_data(df: DataFrame) -> None:
     df["Date"] = to_datetime(df["Date"], format="%Y-%m-%d")
@@ -81,6 +80,6 @@ def plot_macd(df: DataFrame, count: int=1000) -> None:
 
     plt.title(f"Wartości MACD oraz SIGNAL")
     plt.xlabel("Data")
-    plt.ylabel("MACD")
+    plt.ylabel("MACD & SIGNAL")
 
     plt.show()

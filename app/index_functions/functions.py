@@ -1,4 +1,4 @@
-from secrets import choice
+from typing import Tuple
 import numpy as np
 from pandas import DataFrame
 
@@ -35,7 +35,7 @@ def macd(df: DataFrame, column: str, inplace: bool=True) -> DataFrame:
     ema(12, return_df, column)
     ema(26, return_df, column)
 
-    return_df["MACD"] = return_df["EMA_26"] - return_df["EMA_12"]
+    return_df["MACD"] = return_df["EMA_12"] - return_df["EMA_26"]
 
     return return_df
 
@@ -69,3 +69,23 @@ def sell_buy_signals(df: DataFrame, inplace: bool=True):
     return_df["CHOICE"] = choice
 
     return return_df
+
+
+def trading_algorythm(df: DataFrame, period: Tuple[int, int] )-> int:
+    bs_data = list(df["CHOICE"])[min(period):max(period)+1]  # buy/sell data ofc
+    stock_prices = list(df["Close"])[min(period):max(period)+1]
+    
+    units = 1000
+    money = 0
+
+    for i in range(max(period) - min(period)):
+        if bs_data[i] == "buy" and money > 0:
+            units += money / stock_prices[i] # za całe dostępne pieniądze kupujemy tyle akcji ile to możliwe
+            money = 0
+        if bs_data[i] == "sell" and units > 0:
+            money = units * stock_prices[i] #  sprzedajemy wszystko
+            units = 0
+
+    profit = (units * stock_prices[-1] + money) / (1000*stock_prices[0])
+    
+    return profit
