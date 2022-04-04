@@ -1,8 +1,10 @@
+from secrets import choice
 import numpy as np
 from pandas import DataFrame
 
 
 def ema(span: int, df: DataFrame, column: str, inplace: bool=True) -> DataFrame:
+    
     return_df = df
     if not inplace:
         return_df = df.copy()
@@ -25,9 +27,10 @@ def ema(span: int, df: DataFrame, column: str, inplace: bool=True) -> DataFrame:
 
 
 def macd(df: DataFrame, column: str, inplace: bool=True) -> DataFrame:
+    
     return_df = df
     if not inplace:
-       return_df = df.copy()
+        return_df = df.copy()
 
     ema(12, return_df, column)
     ema(26, return_df, column)
@@ -46,6 +49,23 @@ def signal(df: DataFrame, inplace: bool=True) -> DataFrame:
 
     return return_df
 
+
 def sell_buy_signals(df: DataFrame, inplace: bool=True):
-    pass
+
+    return_df = df
+    if not inplace:
+        return_df = df.copy()
+
+    diff = list(return_df["MACD"] - return_df["SIGNAL"])
     
+    choice = [np.nan for i in range(len(return_df))]
+
+    for i in range(1, len(diff)):
+        if diff[i] != np.nan and diff[i] > 0 and diff[i-1] < 0:
+            choice[i] = "buy"
+        elif diff[i] != np.nan and diff[i] < 0 and diff[i-1] > 0:
+            choice[i] = "sell"
+
+    return_df["CHOICE"] = choice
+
+    return return_df
