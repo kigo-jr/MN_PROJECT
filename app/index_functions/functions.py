@@ -45,4 +45,7 @@ def signal(df: DataFrame, inplace: bool=True) -> DataFrame:
     return_df["SIGNAL"] = ema(9, return_df, "MACD", False)['EMA_9']
 
     return return_df
+
+def sell_buy_signals(df: DataFrame, inplace: bool=True):
+    pass
     

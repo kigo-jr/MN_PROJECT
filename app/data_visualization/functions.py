@@ -14,7 +14,7 @@ def plot(df: DataFrame, column: str, company: str, count: int=1000) -> None:
 
     plot_df = df.tail(count)
     
-    plot_df.plot(y=column, ax=ax)
+    plot_df.plot(y=column, ax=ax, linewidth="0.75")
 
 
     ax.set_axisbelow(True)
@@ -71,8 +71,8 @@ def plot_macd(df: DataFrame, count: int=1000) -> None:
 
     plot_df = df.tail(count)
 
-    plot_df.plot(y = "MACD", ax=ax)
-    plot_df.plot(y = "SIGNAL", ax=ax)
+    plot_df.plot(y = "MACD", ax=ax, linewidth="0.75")
+    plot_df.plot(y = "SIGNAL", ax=ax, linewidth="0.75")
     ax.set_axisbelow(True)
     ax.minorticks_on()
 
